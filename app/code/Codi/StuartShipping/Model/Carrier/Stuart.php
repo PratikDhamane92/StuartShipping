@@ -131,10 +131,12 @@ class Stuart extends AbstractCarrier implements CarrierInterface
         }
 
         // Get origin address from system configuration
-        $originStreet = $this->_scopeConfig->getValue('shipping/origin/street_line1', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originCity = $this->_scopeConfig->getValue('shipping/origin/city', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originPostcode = $this->_scopeConfig->getValue('shipping/origin/postcode', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originCountryId = $this->_scopeConfig->getValue('shipping/origin/country_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originStreet = $this->_scopeConfig->getValue('general/store_information/street_line1', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCity = $this->_scopeConfig->getValue('general/store_information/city', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originPostcode = $this->_scopeConfig->getValue('general/store_information/postcode', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCountryId = $this->_scopeConfig->getValue('general/store_information/country_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCompanyName = $this->_scopeConfig->getValue('general/store_information/name', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCompanyPhone = $this->_scopeConfig->getValue('general/store_information/phone', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
         // This is a simplified version, you'll need to adapt it to your needs
         return [
@@ -142,7 +144,12 @@ class Stuart extends AbstractCarrier implements CarrierInterface
                 'pickup_at' => date('Y-m-d\TH:i:s\Z', strtotime('+1 hour')),
                 'pickups' => [
                     [
-                        'address' => $originStreet . ', ' . $originCity . ', ' . $originPostcode . ', ' . $originCountryId
+                        'address' => $originStreet . ', ' . $originCity . ', ' . $originPostcode . ', ' . $originCountryId,
+                        'comment' => 'Ask Store Owner',
+                        'contact' => [
+                            'company' => $originCompanyName,
+                            'phone' => $originCompanyPhone
+                        ]
                     ]
                 ],
                 'dropoffs' => [
@@ -235,9 +242,7 @@ class Stuart extends AbstractCarrier implements CarrierInterface
             'job' => [
                 'pickup_at' => date('Y-m-d\TH:i:s\Z', strtotime('+10 minutes')),
                 'pickups' => [
-                    [
-                        'address' => $originAddress
-                    ]
+                    $originAddress
                 ],
                 'dropoffs' => [
                     [
@@ -260,12 +265,21 @@ class Stuart extends AbstractCarrier implements CarrierInterface
 
     private function getOriginAddress()
     {
-        $originStreet = $this->_scopeConfig->getValue('shipping/origin/street_line1', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originCity = $this->_scopeConfig->getValue('shipping/origin/city', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originPostcode = $this->_scopeConfig->getValue('shipping/origin/postcode', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $originCountryId = $this->_scopeConfig->getValue('shipping/origin/country_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originStreet = $this->_scopeConfig->getValue('general/store_information/street_line1', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCity = $this->_scopeConfig->getValue('general/store_information/city', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originPostcode = $this->_scopeConfig->getValue('general/store_information/postcode', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCountryId = $this->_scopeConfig->getValue('general/store_information/country_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCompanyName = $this->_scopeConfig->getValue('general/store_information/name', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $originCompanyPhone = $this->_scopeConfig->getValue('general/store_information/phone', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
-        return "$originStreet, $originCity, $originPostcode, $originCountryId";
+        return [
+            'address' => "$originStreet, $originCity, $originPostcode, $originCountryId",
+            'comment' => 'Ask Store Owner',
+            'contact' => [
+                'company' => $originCompanyName,
+                'phone' => $originCompanyPhone
+            ]
+        ];
     }
 
     private function formatAddress($address)

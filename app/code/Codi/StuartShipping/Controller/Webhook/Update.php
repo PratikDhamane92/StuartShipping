@@ -123,7 +123,7 @@ class Update extends Action implements CsrfAwareActionInterface
         $reference = explode('_',$details['package']['reference']);
         $orderId = $reference[0];
         
-        $trackingUrl = $details['package']['tracking_url'];
+        $trackingUrl = $details['package']['end_customer_tracking_url'];
 
         // Assuming 'reference' is your order increment ID
         $order = $this->orderRepository->get($orderId);
@@ -146,7 +146,7 @@ class Update extends Action implements CsrfAwareActionInterface
         $packageId = $details['package']['id'];
         $reference = explode('_',$details['package']['reference']);
         $orderId = $reference[0];
-        $trackingUrl = $details['package']['tracking_url'];
+        $trackingUrl = $details['package']['end_customer_tracking_url'];
         $courier = $details['courier']['name'];
 
         // Assuming 'reference' is your order increment ID
@@ -192,7 +192,7 @@ class Update extends Action implements CsrfAwareActionInterface
         $task = $details['task'];
         $reference = explode('_',$details['package']['reference']);
         $orderId = $reference[0];
-        $trackingUrl = $details['package']['tracking_url'];
+        $trackingUrl = $details['package']['end_customer_tracking_url'];
 
         // Assuming 'reference' is your order increment ID
         $order = $this->orderRepository->get($orderId);
@@ -215,7 +215,7 @@ class Update extends Action implements CsrfAwareActionInterface
         $packageId = $details['package']['id'];
         $reference = explode('_',$details['package']['reference']);
         $orderId = $reference[0];
-        $trackingUrl = $details['package']['tracking_url'];
+        $trackingUrl = $details['package']['end_customer_tracking_url'];
 
         // Assuming 'reference' is your order increment ID
         $order = $this->orderRepository->get($orderId);
