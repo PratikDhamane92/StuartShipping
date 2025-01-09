@@ -77,8 +77,7 @@ This screenshot demonstrates the customer-facing order section showing shipping 
 For detailed API documentation and support, visit the official [Stuart Shipping website](https://stuart.com).
 
 ## License
-This module is open-source and licensed under the MIT License. See the LICENSE file for more details.
-
+This module is open-source and licensed under the MIT License.
 ## Contributing
 We welcome contributions! Please open an issue or submit a pull request for any improvements or bug fixes.
 
